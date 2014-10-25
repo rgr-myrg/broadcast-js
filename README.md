@@ -1,0 +1,4 @@
+broadcast-js
+============
+
+BroadcastManager
