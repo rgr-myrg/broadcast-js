@@ -1,6 +1,12 @@
-(function( w ){w.VMN=w.VMN||{};})( window );
+(function( w ) { w.VMN = w.VMN || {}; }) ( window );
 
 (function( VMN ) {
+
+	if ( typeof VMN.BroadcastManager === "object" ) {
+
+		return;
+
+	}
 
 	VMN.BroadcastManager = (function() {
 
@@ -90,4 +96,3 @@
 	})();
 
 })( VMN );
-

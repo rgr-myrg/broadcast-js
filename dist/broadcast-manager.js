@@ -1,12 +1,18 @@
 /**
  * broadcast-manager.js
  * Version: 1.0.0-SNAPSHOT
- * Built: Sat Oct 25 2014 00:14:24 GMT-0400 (EDT)
+ * Built: Sat Oct 25 2014 00:47:20 GMT-0400 (EDT)
  */
 
-(function( w ){w.VMN=w.VMN||{};})( window );
+(function( w ) { w.VMN = w.VMN || {}; }) ( window );
 
 (function( VMN ) {
+
+	if ( typeof VMN.BroadcastManager === "object" ) {
+
+		return;
+
+	}
 
 	VMN.BroadcastManager = (function() {
 
@@ -37,8 +43,8 @@
 				var registered = false;
 
 				if ( typeof receiver === "object" && 
-						typeof receiver.onReceive === "function" && 
-						!isRegistered( receiver ) ) {
+					typeof receiver.onReceive === "function" && 
+					!isRegistered( receiver ) ) {
 
 					receivers.push( receiver );
 					registered = true;
@@ -57,10 +63,10 @@
 
 					if ( receivers[ x ] === receiver ) {
 
-							receivers.splice( x, 1 );
-							removed = true;
+						receivers.splice( x, 1 );
+						removed = true;
 
-							break;
+						break;
 
 					}
 
