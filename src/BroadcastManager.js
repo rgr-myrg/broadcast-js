@@ -31,8 +31,8 @@
 				var registered = false;
 
 				if ( typeof receiver === "object" && 
-						typeof receiver.onReceive === "function" && 
-						!isRegistered( receiver ) ) {
+					typeof receiver.onReceive === "function" && 
+					!isRegistered( receiver ) ) {
 
 					receivers.push( receiver );
 					registered = true;
@@ -51,10 +51,10 @@
 
 					if ( receivers[ x ] === receiver ) {
 
-							receivers.splice( x, 1 );
-							removed = true;
+						receivers.splice( x, 1 );
+						removed = true;
 
-							break;
+						break;
 
 					}
 
@@ -90,3 +90,4 @@
 	})();
 
 })( VMN );
+
