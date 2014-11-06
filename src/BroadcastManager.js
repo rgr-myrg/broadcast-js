@@ -10,73 +10,89 @@
 
 	VMN.BroadcastManager = (function() {
 
-		var	receivers = [],
+		var context = {},
 
-			isRegistered = function( receiver ) {
+		setContextOnce = function( contextName ) {
 
-				var registered = false;
+			if ( !context[ contextName ] ) {
 
-				for ( var x = 0, size = receivers.length; x < size; x++ ) {
+				context[ contextName ] = {
 
-					if ( receivers[ x ] === receiver ) {
-
-						registered = true;
-						break;
-					}
+					receivers: []
 
 				}
 
-				return registered;
+			}
 
-			};
+		},
+
+		processReceiver = function( contextName, receiver, removeIfRegistered ) {
+			var registered = false,
+				receivers  = context[ contextName ].receivers;
+
+			for ( var x = 0, size = receivers.length; x < size; x++ ) {
+
+				if ( receivers[ x ] === receiver ) {
+
+					registered = true;
+
+					if ( removeIfRegistered ) {
+						receivers.splice( x, 1 );
+					}
+
+					break;
+				}
+
+			}
+
+			if ( !registered ) {
+				receivers.push( receiver );
+				registered = true;
+			}
+
+			return registered;
+
+		},
+
+		hasContextAndReceiver = function( contextName, receiver ) {
+			return typeof contextName === "string" && typeof receiver === "object" && typeof receiver.onReceive === "function";
+		};
 
 		return {
 
-			registerReceiver: function( receiver ) {
+			registerReceiver: function( contextName, receiver ) {
 
-				var registered = false;
-
-				if ( typeof receiver === "object" && 
-					typeof receiver.onReceive === "function" && 
-					!isRegistered( receiver ) ) {
-
-					receivers.push( receiver );
-					registered = true;
-
+				if ( !hasContextAndReceiver( contextName, receiver ) ) {
+					return false;
 				}
 
-				return registered;
+				setContextOnce( contextName );
+
+				return processReceiver( contextName, receiver );
 
 			},
 
-			removeReceiver: function( receiver ) {
+			removeReceiver: function( contextName, receiver ) {
 
-				var removed = false;
-
-				for ( var x = 0, size = receivers.length; x < size; x++ ) {
-
-					if ( receivers[ x ] === receiver ) {
-
-						receivers.splice( x, 1 );
-						removed = true;
-
-						break;
-
-					}
-
+				if ( !hasContextAndReceiver( contextName, receiver ) ) {
+					return false;
 				}
 
-				return removed;
+				return processReceiver( contextName, receiver, true );
 
 			},
 
-			sendBroadcast: function( intent ) {
+			sendBroadcast: function( contextName, intent ) {
 
-				if ( typeof intent !== "object" ) {
+				if ( typeof contextName !== "string" || typeof intent.eventName !== "string" ) {
 
 					return false;
 
 				}
+
+				setContextOnce( contextName );
+
+				var receivers = context[ contextName ].receivers;
 
 				for ( var x = 0, size = receivers.length; x < size; x++ ) {
 
