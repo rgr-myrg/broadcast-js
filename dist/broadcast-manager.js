@@ -1,8 +1,4 @@
-/**
- * broadcast-manager.js
- * Version: 1.0.0-SNAPSHOT
- * Built: Thu Nov 06 2014 00:42:03 GMT-0500 (EST)
- */
+/* broadcast-manager.js v1.0 Thu Nov 06 2014 00:58:09 GMT-0500 (EST) */
 
 (function( w ) { w.VMN = w.VMN || {}; }) ( window );
 
@@ -68,7 +64,6 @@
 
 			registerReceiver: function( contextName, receiver ) {
 
-				//if ( typeof contextName !== "string" || typeof receiver.onReceive !== "function" ) {
 				if ( !hasContextAndReceiver( contextName, receiver ) ) {
 					return false;
 				}
@@ -80,7 +75,7 @@
 			},
 
 			removeReceiver: function( contextName, receiver ) {
-				//if ( typeof contextName !== "string" || typeof receiver.onReceive !== "function" ) {
+
 				if ( !hasContextAndReceiver( contextName, receiver ) ) {
 					return false;
 				}

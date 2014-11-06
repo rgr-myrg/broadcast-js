@@ -1,6 +1,6 @@
 var	headerFile  = "HEADER",
 	artifactId  = "broadcast-manager",
-	version     = "1.0.0-SNAPSHOT",
+	version     = "1.0",
 	packaging   = "js",
 	targetPath  = "dist",
 	sourcePath  = "src",
