@@ -49,17 +49,6 @@
 					return false;
 				} 
 
-//				var intent = {};
-//				eventData  = eventData || {};
-//
-//				for ( var i in eventData ) {
-//					if ( eventData.hasOwnProperty( i ) ) {
-//						intent[ i ] = eventData [ i ];
-//					}
-//				}
-//
-//				intent.eventName = eventName;
-
 				for ( var x = 0, size = receivers.length; x < size; x++ ) {
 					try {
 	
