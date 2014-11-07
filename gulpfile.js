@@ -1,19 +1,22 @@
 var	headerFile  = "HEADER",
-	artifactId  = "broadcast-manager",
+	artifactId  = "notifier",
 	version     = "1.0",
 	packaging   = "js",
 	targetPath  = "dist",
 	sourcePath  = "src",
 	sourceFiles = [
-		"BroadcastManager.js",
+		"VMN.js",
+		"Context.js",
+		"Notifier.js"
 	];
 
-var	gulp = require( "gulp" ),
-	jshint = require( "gulp-jshint" ),
-	concat = require( "gulp-concat" ),
-	uglify = require( "gulp-uglify" ),
-	header = require( "gulp-header" ),
-	nodeFS = require( "fs" );
+var	gulp    = require( "gulp" ),
+	jshint  = require( "gulp-jshint" ),
+	concat  = require( "gulp-concat" ),
+	uglify  = require( "gulp-uglify" ),
+	header  = require( "gulp-header" ),
+	wrapper = require( "gulp-wrapper" ),
+	nodeFS  = require( "fs" );
 
 var	getHeaderFile = function() {
 		return nodeFS.readFileSync( headerFile, {encoding: "utf8"} )
@@ -54,6 +57,11 @@ gulp.task( "lint", function() {
 gulp.task( "concat", function() {
 	return gulp.src( sourceFiles )
 		.pipe( concat( artifactDebug ) )
+// 		.pipe(
+// 			wrapper({
+// 			header: "(function($$){",
+// 			footer: "})(VMN);"
+// 		}))
 		.pipe( header( getHeaderFile() ) )
 		.pipe( gulp.dest( targetPath ) );
 });
