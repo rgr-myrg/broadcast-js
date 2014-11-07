@@ -1,4 +1,4 @@
-/* broadcast-manager.js v1.0 Fri Nov 07 2014 00:37:16 GMT-0500 (EST) */
+/* notifier.js v1.0 Fri Nov 07 2014 00:55:53 GMT-0500 (EST) */
 (function( window ) {
 
 	window.VMN = window.VMN || {};
@@ -86,17 +86,6 @@
 				if ( typeof eventName !== "string" ) {
 					return false;
 				} 
-
-//				var intent = {};
-//				eventData  = eventData || {};
-//
-//				for ( var i in eventData ) {
-//					if ( eventData.hasOwnProperty( i ) ) {
-//						intent[ i ] = eventData [ i ];
-//					}
-//				}
-//
-//				intent.eventName = eventName;
 
 				for ( var x = 0, size = receivers.length; x < size; x++ ) {
 					try {
