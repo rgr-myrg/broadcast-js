@@ -1,9 +1,40 @@
-/* broadcast-manager.js v1.0 Fri Nov 07 2014 00:18:22 GMT-0500 (EST) */
+/* broadcast-manager.js v1.0 Fri Nov 07 2014 00:37:16 GMT-0500 (EST) */
 (function( window ) {
 
 	window.VMN = window.VMN || {};
 
 })( window );
+
+(function($$){
+
+	if ( typeof $$.Intent === "object" ) {
+		return;
+	}
+
+	$$.Intent = function( eventName, eventData ) {
+		var	name = eventName,
+			data = eventData || {};
+	
+		return {
+			getName: function() {
+				return name;
+			},
+
+			getData: function() {
+				var clone = {};
+
+				for ( var i in data ) {
+					if ( data.hasOwnProperty( i ) ) {
+						clone[ i ] = data [ i ];
+					}
+				}
+
+				return clone;
+			}
+		};
+	};
+
+})(VMN);
 
 (function($$){
 
@@ -56,21 +87,21 @@
 					return false;
 				} 
 
-				var intent = {};
-				eventData  = eventData || {};
-
-				for ( var i in eventData ) {
-					if ( eventData.hasOwnProperty( i ) ) {
-						intent[ i ] = eventData [ i ];
-					}
-				}
-
-				intent.eventName = eventName;
+//				var intent = {};
+//				eventData  = eventData || {};
+//
+//				for ( var i in eventData ) {
+//					if ( eventData.hasOwnProperty( i ) ) {
+//						intent[ i ] = eventData [ i ];
+//					}
+//				}
+//
+//				intent.eventName = eventName;
 
 				for ( var x = 0, size = receivers.length; x < size; x++ ) {
 					try {
 	
-						receivers[ x ].onReceive( intent );
+						receivers[ x ].onReceive( $$.Intent( eventName, eventData ) );
 	
 					} catch( e ) {
 					}

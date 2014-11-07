@@ -6,6 +6,7 @@ var	headerFile  = "HEADER",
 	sourcePath  = "src",
 	sourceFiles = [
 		"VMN.js",
+		"Intent.js",
 		"Context.js",
 		"Notifier.js"
 	];
