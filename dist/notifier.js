@@ -1,11 +1,11 @@
-/* notifier.js v1.0 Fri Nov 07 2014 00:55:53 GMT-0500 (EST) */
+/* notifier.js v1.0 Sat Nov 08 2014 20:27:34 GMT-0500 (EST) */
 (function( window ) {
 
 	window.VMN = window.VMN || {};
 
 })( window );
 
-(function($$){
+(function( $$ ) {
 
 	if ( typeof $$.Intent === "object" ) {
 		return;
@@ -34,9 +34,9 @@
 		};
 	};
 
-})(VMN);
+})( VMN );
 
-(function($$){
+(function( $$ ) {
 
 	if ( typeof $$.Context === "object" ) {
 		return;
@@ -50,12 +50,12 @@
 				return false;
 			}
 	
-			var registered = false;
+			var isRegistered = false;
 	
 			for ( var x = 0, size = receivers.length; x < size; x++ ) {
 				if ( receivers[ x ] === receiver ) {
 	
-					registered = true;
+					isRegistered = true;
 	
 					if ( removeIfRegistered ) {
 						receivers.splice( x, 1 );
@@ -65,12 +65,12 @@
 				}
 			}
 	
-			if ( !registered ) {
+			if ( !isRegistered ) {
 				receivers.push( receiver );
-				registered = true;
+				isRegistered = true;
 			}
 	
-			return registered;
+			return isRegistered;
 		};
 	
 		return {
@@ -89,19 +89,21 @@
 
 				for ( var x = 0, size = receivers.length; x < size; x++ ) {
 					try {
-	
+
 						receivers[ x ].onReceive( $$.Intent( eventName, eventData ) );
 	
 					} catch( e ) {
 					}
 				}
+
+				return true;
 			}
 		};
 	};
 
-})(VMN);
+})( VMN );
 
-(function($$){
+(function( $$ ) {
 
 	if ( typeof $$.Notifier === "object" ) {
 		return;
@@ -125,4 +127,4 @@
 		};
 	})();
 
-})(VMN);
+})( VMN );

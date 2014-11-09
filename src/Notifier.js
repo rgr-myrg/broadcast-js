@@ -1,4 +1,4 @@
-(function($$){
+(function( $$ ) {
 
 	if ( typeof $$.Notifier === "object" ) {
 		return;
@@ -22,4 +22,4 @@
 		};
 	})();
 
-})(VMN);
+})( VMN );

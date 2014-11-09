@@ -17,6 +17,7 @@ var	gulp    = require( "gulp" ),
 	uglify  = require( "gulp-uglify" ),
 	header  = require( "gulp-header" ),
 	wrapper = require( "gulp-wrapper" ),
+	karma   = require("karma").server,
 	nodeFS  = require( "fs" );
 
 var	getHeaderFile = function() {
@@ -77,4 +78,12 @@ gulp.task( "minify", function() {
 		.pipe( gulp.dest( targetPath ) );
 });
 
-gulp.task( "default", ["init", "lint", "concat", "minify"] );
+gulp.task( "test", function (done) {
+	karma.start({
+		configFile: __dirname + "/karma.conf.js",
+		singleRun: true
+	}, done);
+});
+
+
+gulp.task( "default", ["init", "lint", "concat", "minify", "test"] );

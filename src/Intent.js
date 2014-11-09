@@ -1,4 +1,4 @@
-(function($$){
+(function( $$ ) {
 
 	if ( typeof $$.Intent === "object" ) {
 		return;
@@ -27,4 +27,4 @@
 		};
 	};
 
-})(VMN);
+})( VMN );

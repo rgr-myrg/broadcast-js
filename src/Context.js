@@ -1,4 +1,4 @@
-(function($$){
+(function( $$ ) {
 
 	if ( typeof $$.Context === "object" ) {
 		return;
@@ -12,12 +12,12 @@
 				return false;
 			}
 	
-			var registered = false;
+			var isRegistered = false;
 	
 			for ( var x = 0, size = receivers.length; x < size; x++ ) {
 				if ( receivers[ x ] === receiver ) {
 	
-					registered = true;
+					isRegistered = true;
 	
 					if ( removeIfRegistered ) {
 						receivers.splice( x, 1 );
@@ -27,12 +27,12 @@
 				}
 			}
 	
-			if ( !registered ) {
+			if ( !isRegistered ) {
 				receivers.push( receiver );
-				registered = true;
+				isRegistered = true;
 			}
 	
-			return registered;
+			return isRegistered;
 		};
 	
 		return {
@@ -51,14 +51,16 @@
 
 				for ( var x = 0, size = receivers.length; x < size; x++ ) {
 					try {
-	
+
 						receivers[ x ].onReceive( $$.Intent( eventName, eventData ) );
 	
 					} catch( e ) {
 					}
 				}
+
+				return true;
 			}
 		};
 	};
 
-})(VMN);
+})( VMN );
